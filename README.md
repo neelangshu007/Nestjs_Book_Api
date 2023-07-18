@@ -47,7 +47,6 @@ npm install
 2. In the src/app.module.ts file, update the database connection settings according to your MySQL setup:
 
 ```bash
-Copy code
 SequelizeModule.forRoot({
   dialect: 'mysql',
   host: 'localhost',
@@ -64,7 +63,6 @@ Replace your_mysql_username and your_mysql_password with your MySQL credentials.
 
 3. Run the application:
 ```bash
-Copy code
 npm run start:dev
 ```
 The API server will start at http://localhost:3000.

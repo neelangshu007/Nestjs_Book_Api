@@ -1,73 +1,121 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Description
+NestJS Book API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This is a simple CRUD (Create, Read, Update, Delete) RESTful API for managing books using NestJS, Sequelize (with MySQL database), and TypeScript.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Table of Contents
+- Features
+- Prerequisites
+- Getting Started
+  - Installation
+  - Database Setup
+- API Endpoints
+- Technologies Used
+- Contributing
 
-## Description
+## Features
+- Fetch a list of all books.
+- Fetch a specific book by ID.
+- Create a new book.
+- Update an existing book.
+- Delete a book.
+  
+## Prerequisites
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Before running the project, make sure you have the following installed:
 
+- Node.js and npm
+- MySQL Server and Workbench
+- Git
+
+## Getting Started
 ## Installation
-
+1. Clone the repository:
 ```bash
-$ npm install
+git clone https://github.com/your-username/Nestjs_Book_Api.git
+cd Nestjs_Book_Api
 ```
 
-## Running the app
-
+2. Install the dependencies:
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Test
+## Database Setup
+1. Create a new MySQL database named books_db.
+
+2. In the src/app.module.ts file, update the database connection settings according to your MySQL setup:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+Copy code
+SequelizeModule.forRoot({
+  dialect: 'mysql',
+  host: 'localhost',
+  port: 3306,
+  username: 'your_mysql_username',
+  password: 'your_mysql_password',
+  database: 'books_db',
+  autoLoadModels: true,
+  synchronize: true,
+}),
 ```
 
-## Support
+Replace your_mysql_username and your_mysql_password with your MySQL credentials.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+3. Run the application:
+```bash
+Copy code
+npm run start:dev
+```
+The API server will start at http://localhost:3000.
 
-## Stay in touch
+## API Endpoints
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Fetch All Books
+- URL: /books
+- Method: GET
+- Response: Returns an array of all books.
+ 
+## Fetch Book by ID
+- URL: /books/:id
+- Method: GET
+- Parameters: id (number) - The ID of the book to retrieve.
+- Response: Returns a single book object with the specified ID.
+  
+## Create a New Book
+- URL: /books
+- Method: POST
+- Request Body:
+  
+```bash
+{
+  "title": "Sample Book",
+  "author": "John Doe"
+}
+```
+- Response: Returns the created book object.
+  
+## Update a Book
+- URL: /books/:id
+- Method: PUT
+- Parameters: id (number) - The ID of the book to update.
+- Request Body:
 
-## License
-
-Nest is [MIT licensed](LICENSE).
+```bash
+{
+  "title": "Updated Book Title",
+  "author": "Jane Smith"
+}
+```
+- Response: Returns the updated book object.
+  
+## Delete a Book
+- URL: /books/:id
+- Method: DELETE
+- Parameters: id (number) - The ID of the book to delete.
+- Response: Returns a message indicating successful deletion.
+  
+## Technologies Used
+- NestJS - A progressive Node.js framework for building efficient and scalable server-side applications.
+- Sequelize - A powerful and flexible ORM (Object-Relational Mapping) library for Node.js.
+- MySQL - An open-source relational database management system.
